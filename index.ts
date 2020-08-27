@@ -19,7 +19,7 @@ mongoose.connect("mongodb+srv://bob:bob@data-0k5bx.mongodb.net/slack", {useNewUr
 
 var app = express()
 
-app.use(cors());
+app.use(cors("*"));
 
 app.use(express.static('build'))
 
@@ -46,7 +46,8 @@ var pubsub = new PubSub()
 
 var server = new ApolloServer({
     schema,
-    context: ({ req, res }: any) => ({ req, res, pubsub })
+    context: ({ req, res }: any) => ({ req, res, pubsub }),
+    playground:true
 })
 
 server.applyMiddleware({ app })

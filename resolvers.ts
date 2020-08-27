@@ -2,6 +2,7 @@ import user from "./resolvers/user";
 import team from "./resolvers/team";
 import channel from "./resolvers/channel";
 import message from "./resolvers/message";
+import pubsub from './other/pubsub'
 
 const NEW_MESSAGE = 'NEW_MESSAGE'
 
@@ -39,10 +40,9 @@ export default {
     },
     Subscription:{
         newMessage:{
-            subscribe: (_, { channelid }, { pubsub }) => {
+            subscribe: (_, { channelid }) => {
                 return pubsub.asyncIterator(`${NEW_MESSAGE}_${channelid}`)
-            }
-            
+            }   
         }
     }
 }

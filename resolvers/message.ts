@@ -1,13 +1,14 @@
 import { Channel } from "../models/Channel";
 import { Message } from "../models/Message";
 import { User } from "../models/User";
+import pubsub from '../other/pubsub'
 
 const NEW_MESSAGE = 'NEW_MESSAGE';
 export default {
     add: async (
         _:any,
         {channelid, text},
-        { req, pubsub }
+        { req }
     ) => {
         if(!req.user){
             return false
